@@ -8,12 +8,12 @@ class CustomersController < ApplicationController
 		@address.city = 'Ummendorf'
 		@address.state = 'Bayern'
 		@customer.address = @address
-		Rails.logger.debug 'DEBUG: Customer name is ' + @customer.inspect
+		Rails.logger.debug 'DEBUG: Customer name is ' + @customer.to_s
 		@customer.save
 	end
 
 	def get
 		@customer = Customer.first
-		Rails.logger.debug 'DEBUG: Customer name is ' + @customer.inspect
+		flash.now[:notice] = 'Customer name is ' + @customer.surname
 	end
 end
