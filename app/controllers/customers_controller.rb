@@ -12,8 +12,26 @@ class CustomersController < ApplicationController
 		@customer.save
 	end
 
+	def create
+		@customer = Customer.new(secure_params)
+		if @customer.valid?
+			# TODO send message
+			flash[:notice] = "Message sent from #{@customer.surname}."
+			redirect_to root_path
+		else
+			render :new
+		end
+	end
+
 	def get
 		@customer = Customer.first
 		flash.now[:notice] = 'Customer name is ' + @customer.surname
 	end
+
+private
+
+	def secure_params
+		params.require(:customer).permit(:surname, :firstname)
+	end
+
 end

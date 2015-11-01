@@ -1,3 +1,12 @@
-<h3> Inserting to CouchDB </h3>
+<% content_for :title do %>New<% end %>
 
-<p> -> saving customer <%= @customer %>.</p>
+<h3> Neuer Kunde </h3>
+
+<div class="form">
+  <%= simple_form_for @customer do |form| %>
+  <%= form.error_notification %>
+  <%= form.input :surname, autofocus: true %>
+  <%= form.input :firstname %>
+  <%= form.button :submit, 'Submit', class: 'submit'%>
+  <% end %>
+</div>

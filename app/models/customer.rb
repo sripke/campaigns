@@ -2,18 +2,22 @@ require 'couchrest_model'
 require 'Address'
 
 class Customer < CouchRest::Model::Base
+include ActiveModel::Model
 
-	property :surname,      String
-	property :firstname,  	String
-	property :address, 		Address
+	attr_accessor :surname,				:string
+	attr_accessor :firstname,			:string
+	property :address, 						Address
 	timestamps!
 
-  	def to_s
+	validates_presence_of :surname
+	validates_presence_of :firstname
+	#validates_presence_of :address
+
+  def to_s
 	    name_str = "#{surname}, #{firstname}\n#{address}"
 	end
 
 	design do
     	view :by_surname
-    end
-
+  end
 end
